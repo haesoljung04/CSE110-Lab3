@@ -33,7 +33,7 @@ describe("Create StickyNote", () => {
 });
 
 describe("Read StickyNote", () => {
-  test("creates a new note", () => {
+  test("Checks if all stickynotes are present upon app start", () => {
     render(<StickyNotes />);
 
    const note1Title = screen.getByText("Note 1");
@@ -48,5 +48,23 @@ describe("Read StickyNote", () => {
 
    expect(note2Title).toBeInTheDocument();
    expect(note2Content).toBeInTheDocument();
+  });
+});
+
+describe("Delete StickyNote", () => {
+  test("Checks if note 1 is deleted", () => {
+    render(<StickyNotes />);
+
+    const note1Title = screen.getByText("Note 1");
+    const note1Content = screen.getByText("This is note 1");
+
+    expect(note1Title).toBeInTheDocument();
+    expect(note1Content).toBeInTheDocument();
+
+    const deleteButton = screen.getAllByText("X")[0];
+    fireEvent.click(deleteButton);
+
+    expect(screen.queryByText("Note 1")).not.toBeInTheDocument();
+    expect(screen.queryByText("This is note 1")).not.toBeInTheDocument();
   });
 });

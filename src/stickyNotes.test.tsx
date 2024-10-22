@@ -51,6 +51,27 @@ describe("Read StickyNote", () => {
   });
 });
 
+describe("Update StickyNote", () => {
+  test("Checks if note 1 is updated", () => {
+    render(<StickyNotes />);
+
+    const note1Title = screen.getByText("Note 1");
+    const note1Content = screen.getByText("This is note 1");
+
+    expect(note1Title).toBeInTheDocument();
+    expect(note1Content).toBeInTheDocument();
+
+    fireEvent.input(note1Title, { target: { innerHTML: "Updated Note 1" } });
+    fireEvent.input(note1Content, { target: { innerHTML: "Updated content for note 1" } });
+
+    fireEvent.blur(note1Title);
+    fireEvent.blur(note1Content);
+
+    expect(screen.getByText("Updated Note 1")).toBeInTheDocument();
+    expect(screen.getByText("Updated content for note 1")).toBeInTheDocument();
+  });
+});
+
 describe("Delete StickyNote", () => {
   test("Checks if note 1 is deleted", () => {
     render(<StickyNotes />);

@@ -12,7 +12,7 @@ describe("Create StickyNote", () => {
  test("creates a new note", () => {
    render(<StickyNotes />);
 
-// Please make sure your sticky note has a title and content input field with the following placeholders.
+    // Please make sure your sticky note has a title and content input field with the following placeholders.
    const createNoteTitleInput = screen.getByPlaceholderText("Note Title");
    const createNoteContentTextarea =
      screen.getByPlaceholderText("Note Content");
@@ -30,4 +30,23 @@ describe("Create StickyNote", () => {
    expect(newNoteTitle).toBeInTheDocument();
    expect(newNoteContent).toBeInTheDocument();
  });
+});
+
+describe("Read StickyNote", () => {
+  test("creates a new note", () => {
+    render(<StickyNotes />);
+
+   const note1Title = screen.getByText("Note 1");
+   const note1Content = screen.getByText("This is note 1");
+
+   expect(note1Title).toBeInTheDocument();
+   expect(note1Content).toBeInTheDocument();
+
+
+   const note2Title = screen.getByText("Note 2");
+   const note2Content = screen.getByText("This is note 2");
+
+   expect(note2Title).toBeInTheDocument();
+   expect(note2Content).toBeInTheDocument();
+  });
 });
